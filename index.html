@@ -17,9 +17,10 @@ height:100vh;
 background:#dfe7f2;
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:flex-start;
 font-family:'Inter',sans-serif;
 transition:.5s;
+padding: 40px 0;
 }
 
 
@@ -129,29 +130,25 @@ display:flex;
 
 font-family:'Montserrat',sans-serif;
 
-padding:15px 30px;
+padding:15px 25px;
 
 cursor:pointer;
 
 background:#ddd;
 
-border-radius:15px 15px 0 0;
+border-right:1px solid white;
 
-margin-right:6px;
-
-transition:all .35s ease;
-
-position:relative;
-
-top:8px;
+transition:.3s;
 
 }
+
 
 .tab:hover{
 
-top:4px;
+transform:translateY(-5px);
 
 }
+
 
 .active{
 
@@ -159,31 +156,19 @@ background:white;
 
 font-weight:bold;
 
-padding:22px 35px;
-
-top:0;
-
-z-index:10;
-
-box-shadow:0 -6px 15px rgba(0,0,0,.12);
-
 }
+
 
 
 /* PAGE */
 
 .page{
 
-flex:1;
-
 padding:35px;
 
-overflow:auto;
-
-animation:fade .5s;
+overflow:visible;
 
 }
-
 
 
 @keyframes fade{
@@ -779,19 +764,7 @@ tab.classList.add("active");
 
 }
 
-const page = document.getElementById("page");
 
-page.addEventListener("scroll",()=>{
-
-const active=document.querySelector(".active");
-
-const amount=Math.min(page.scrollTop/10,20);
-
-active.style.paddingTop=(22+amount)+"px";
-
-active.style.paddingBottom=(22+amount)+"px";
-
-});
 
 openTab(
 "camp",
