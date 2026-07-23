@@ -784,23 +784,15 @@ let entered = document.getElementById("password").value;
 
 if(entered === correctPassword){
 
-    document.getElementById("login").style.display="none";
+document.getElementById("login").style.display="none";
 
-    document.getElementById("file").style.display="flex";
-
-}
-
-else if(entered === "SecretAccess"){
-
-    window.location.href = "secret.html";
+document.getElementById("file").style.display="flex";
 
 }
 
 else{
 
-    document.getElementById("error").innerHTML="Incorrect password";
-
-}
+document.getElementById("error").innerHTML="Incorrect password";
 
 }
 
