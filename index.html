@@ -790,33 +790,16 @@ document.getElementById("file").style.display="flex";
 
 }
 
+ else if(entered === "SecretAccess"){
+
+        // Open secret archive
+        window.location.href = "secret.html";
+
+    }
+
 else{
 
 document.getElementById("error").innerHTML="Incorrect password";
-
-}
-
-function openSecret() {
-
-    const password = prompt("Enter password:");
-
-    if (password === "SecretAccess") {
-
-        window.location.href = "secret.html";
-
-    } 
-    
-    else if (password === "summer2026") {
-
-        window.location.href = "summer.html";
-
-    } 
-    
-    else {
-
-        alert("Incorrect password.");
-
-    }
 
 }
 
