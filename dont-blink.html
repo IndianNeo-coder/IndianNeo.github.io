@@ -8,24 +8,140 @@
 <style>
 
 body {
-    background:black;
-    color:white;
-    text-align:center;
-    font-family:Arial;
+    background:
+    radial-gradient(circle at center, #1a1a1a 0%, #000000 70%);
+    color: #d8d8d8;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    overflow: hidden;
 }
+
+
+/* Title */
+h1 {
+    color: #bcbcbc;
+    font-size: 42px;
+    letter-spacing: 6px;
+    text-shadow:
+    0 0 10px #ffffff,
+    0 0 20px #777;
+}
+
+
+/* Instructions */
+p {
+    color: #888;
+    font-size: 18px;
+}
+
+
+
+/* HUD */
+#stats {
+
+    font-size: 22px;
+    color: #ddd;
+
+    background: rgba(0,0,0,0.6);
+
+    border: 1px solid #555;
+
+    padding: 12px;
+
+    width: 350px;
+
+    margin: 15px auto;
+
+    border-radius: 10px;
+
+    box-shadow:
+    0 0 20px black;
+
+}
+
+
+
+/* Game screen */
 
 canvas {
-    background:#080808;
-    border:3px solid #555;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #050505,
+    #111,
+    #050505
+    );
+
+    border:
+
+    3px solid #666;
+
+
+    box-shadow:
+
+    0 0 30px black,
+
+    inset 0 0 40px #000;
+
+
 }
 
-#stats {
-    font-size:22px;
-}
+
+
+/* Buttons */
 
 button {
-    padding:12px 25px;
-    font-size:18px;
+
+    background:#111;
+
+    color:white;
+
+    border:2px solid #777;
+
+    padding:15px 30px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    font-family:"Courier New";
+
+    transition:0.3s;
+
+}
+
+
+button:hover {
+
+    background:#444;
+
+    box-shadow:
+
+    0 0 20px white;
+
+}
+
+
+
+/* Makes the whole game feel darker */
+
+html {
+
+    background:black;
+
+}
+
+
+
+/* Scrollbar removal */
+
+::-webkit-scrollbar {
+
+    display:none;
+
 }
 
 </style>
