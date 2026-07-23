@@ -777,29 +777,31 @@ document.querySelector(".tab")
 
 function checkPassword(){
 
-let correctPassword = "summer2026";
+    let correctPassword = "summer2026";
 
-let entered = document.getElementById("password").value;
+    let entered = document.getElementById("password").value;
 
 
-if(entered === correctPassword){
+    if(entered === correctPassword){
 
-document.getElementById("login").style.display="none";
+        document.getElementById("login").style.display="none";
 
-document.getElementById("file").style.display="flex";
+        document.getElementById("file").style.display="flex";
 
-}
+    }
 
- else if(entered === "SecretAccess"){
+    else if(entered === "SecretAccess"){
 
         // Open secret archive
         window.location.href = "secret.html";
 
     }
 
-else{
+    else{
 
-document.getElementById("error").innerHTML="Incorrect password";
+        document.getElementById("error").innerHTML="Incorrect password";
+
+    }
 
 }
 
