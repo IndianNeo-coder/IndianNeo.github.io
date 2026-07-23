@@ -796,6 +796,22 @@ document.getElementById("error").innerHTML="Incorrect password";
 
 }
 
+function openSecret() {
+
+    const password = prompt("Enter password:");
+
+    if (password === "SecretAccess") {
+
+        window.location.href = "secret.html";
+
+    } else {
+
+        alert("Incorrect password.");
+
+    }
+
+}
+
 }
 
 </script>
