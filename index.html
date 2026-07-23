@@ -777,12 +777,10 @@ document.querySelector(".tab")
 
 function checkPassword(){
 
-    let correctPassword = "summer2026";
-
     let entered = document.getElementById("password").value;
 
 
-    if(entered === correctPassword){
+    if(entered === "summer2026"){
 
         document.getElementById("login").style.display="none";
 
@@ -790,12 +788,13 @@ function checkPassword(){
 
     }
 
+
     else if(entered === "SecretAccess"){
 
-        // Open secret archive
         window.location.href = "secret.html";
 
     }
+
 
     else{
 
