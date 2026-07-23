@@ -19,12 +19,13 @@ canvas {
     border:3px solid #555;
 }
 
-h1 {
-    color:#aaa;
-}
-
 #stats {
     font-size:22px;
+}
+
+button {
+    padding:12px 25px;
+    font-size:18px;
 }
 
 </style>
@@ -34,7 +35,6 @@ h1 {
 
 <body>
 
-
 <h1>👁 DON'T BLINK</h1>
 
 <p>
@@ -42,12 +42,9 @@ Arrow keys = Move<br>
 Hold SPACE = Blink (Angels move)
 </p>
 
-
 <div id="stats"></div>
 
-
 <canvas id="game" width="800" height="500"></canvas>
-
 
 
 <script>
@@ -59,12 +56,10 @@ const ctx=canvas.getContext("2d");
 
 
 let player={
-
 x:400,
 y:250,
 size:18,
 speed:4
-
 };
 
 
@@ -77,12 +72,44 @@ let forcedBlink=false;
 
 let eyePower=100;
 
+let time=0;
+
+let highScore=0;
+
 let lives=3;
 
-let time=60;
+let gameOver=false;
+
 
 
 let angels=[];
+
+
+
+let obstacles=[
+
+{
+x:150,
+y:100,
+width:100,
+height:30
+},
+
+{
+x:500,
+y:300,
+width:150,
+height:40
+},
+
+{
+x:300,
+y:400,
+width:60,
+height:80
+}
+
+];
 
 
 
@@ -100,7 +127,7 @@ angels.push({
 
 x:Math.random()*750,
 y:Math.random()*450,
-speed:0.6
+speed:2.5
 
 });
 
@@ -109,19 +136,14 @@ speed:0.6
 
 
 
-// controls
-
 document.addEventListener("keydown",e=>{
 
 
 keys[e.key]=true;
 
 
-if(e.code==="Space"){
-
+if(e.code==="Space")
 blinking=true;
-
-}
 
 
 });
@@ -134,11 +156,8 @@ document.addEventListener("keyup",e=>{
 keys[e.key]=false;
 
 
-if(e.code==="Space"){
-
+if(e.code==="Space")
 blinking=false;
-
-}
 
 
 });
@@ -147,7 +166,46 @@ blinking=false;
 
 
 
+
+function collision(rect){
+
+
+for(let o of obstacles){
+
+
+if(
+
+rect.x < o.x+o.width &&
+rect.x+rect.size > o.x &&
+rect.y < o.y+o.height &&
+rect.y+rect.size > o.y
+
+){
+
+return true;
+
+}
+
+
+}
+
+
+return false;
+
+}
+
+
+
+
+
+
+
 function movePlayer(){
+
+
+let oldX=player.x;
+let oldY=player.y;
+
 
 
 if(keys["ArrowUp"])
@@ -167,6 +225,17 @@ player.x+=player.speed;
 
 
 
+
+if(collision(player)){
+
+player.x=oldX;
+player.y=oldY;
+
+}
+
+
+
+
 player.x=Math.max(
 0,
 Math.min(canvas.width,player.x)
@@ -179,7 +248,9 @@ Math.min(canvas.height,player.y)
 );
 
 
+
 }
+
 
 
 
@@ -213,8 +284,8 @@ if(eyePower<=0){
 
 forcedBlink=true;
 
-
 eyePower=100;
+
 
 
 setTimeout(()=>{
@@ -227,7 +298,9 @@ forcedBlink=false;
 }
 
 
+
 }
+
 
 
 
@@ -248,22 +321,27 @@ let dx=player.x-a.x;
 let dy=player.y-a.y;
 
 
-let distance=Math.sqrt(
+let dist=Math.sqrt(
 dx*dx+dy*dy
 );
 
 
 
-a.x+=(dx/distance)*a.speed;
+a.x+=(dx/dist)*a.speed;
 
-a.y+=(dy/distance)*a.speed;
+a.y+=(dy/dist)*a.speed;
 
 
 
-if(distance<25){
+a.speed+=0.002;
+
+
+
+if(dist<25){
 
 
 lives--;
+
 
 
 a.x=Math.random()*750;
@@ -274,32 +352,59 @@ a.y=Math.random()*450;
 
 if(lives<=0){
 
-
-alert("THE ANGELS GOT YOU 🗿");
-
-location.reload();
-
+angelCaught();
 
 }
 
 
 }
-
 
 
 });
 
+
+}
+
+
+
 }
 
 
 
+
+
+
+function angelCaught(){
+
+
+gameOver=true;
+
+
+document.body.innerHTML=`
+
+<h1>🗿 THE ANGEL GOT YOU</h1>
+
+<img src="weeping-angel.png" width="350">
+
+<h2>
+Survival Time: ${time} seconds
+</h2>
+
+<button onclick="location.reload()">
+Try Again
+</button>
+
+`;
+
 }
+
+
+
 
 
 
 
 function draw(){
-
 
 
 ctx.clearRect(
@@ -311,20 +416,23 @@ canvas.height
 
 
 
-// background dust
+// obstacles
 
-for(let i=0;i<50;i++){
+ctx.fillStyle="#444";
 
-ctx.fillStyle="#333";
+
+obstacles.forEach(o=>{
+
 
 ctx.fillRect(
-Math.random()*800,
-Math.random()*500,
-2,
-2
+o.x,
+o.y,
+o.width,
+o.height
 );
 
-}
+
+});
 
 
 
@@ -333,7 +441,9 @@ Math.random()*500,
 
 ctx.fillStyle="cyan";
 
+
 ctx.beginPath();
+
 
 ctx.arc(
 player.x,
@@ -343,13 +453,14 @@ player.size,
 Math.PI*2
 );
 
+
 ctx.fill();
 
 
 
 
-// angels
 
+// angels
 
 ctx.font="40px Arial";
 
@@ -369,7 +480,7 @@ a.y
 
 
 
-// blink screen
+
 
 if(blinking || forcedBlink){
 
@@ -388,6 +499,7 @@ ctx.fillStyle="white";
 
 ctx.font="30px Arial";
 
+
 ctx.fillText(
 "👁 BLINKING...",
 280,
@@ -399,8 +511,10 @@ ctx.fillText(
 
 
 
-
 }
+
+
+
 
 
 
@@ -411,7 +525,9 @@ function updateHUD(){
 document.getElementById("stats").innerHTML=
 
 "Time: "+time+
-" | Lives: "+
+" seconds"+
+"<br>High Score: "+highScore+
+"<br>Lives: "+
 "❤️".repeat(lives)+
 "<br>Eye Power: "+
 Math.floor(eyePower)+"%";
@@ -422,29 +538,27 @@ Math.floor(eyePower)+"%";
 
 
 
+
+
 setInterval(()=>{
 
 
-if(time>0){
+if(!gameOver){
 
-time--;
-
-}
+time++;
 
 
-else{
-
-alert("YOU SURVIVED THE ANGELS!");
-
-location.reload();
-
-}
+if(time>highScore)
+highScore=time;
 
 
 
-if(time%15===0){
+if(time%20===0){
 
 spawnAngel();
+
+}
+
 
 }
 
@@ -456,7 +570,12 @@ spawnAngel();
 
 
 
-function gameLoop(){
+
+
+function loop(){
+
+
+if(!gameOver){
 
 
 movePlayer();
@@ -470,13 +589,16 @@ draw();
 updateHUD();
 
 
-requestAnimationFrame(gameLoop);
+requestAnimationFrame(loop);
 
 
 }
 
 
-gameLoop();
+}
+
+
+loop();
 
 
 
@@ -485,9 +607,4 @@ gameLoop();
 
 </body>
 
-</html>
-
-</script>
-
-</body>
 </html>
