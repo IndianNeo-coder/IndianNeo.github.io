@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Don't Blink</title>
+
+<style>
+body {
+    margin:0;
+    background:black;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+}
+
+h1 {
+    color:#aaa;
+}
+
+canvas {
+    background:#111;
+    border:2px solid white;
+    display:block;
+    margin:auto;
+}
+
+#timer {
+    font-size:25px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>👽 DON'T BLINK</h1>
+<p>
+Hold SPACE to blink.<br>
+The Angels move when you cannot see them.
+</p>
+
+<div id="timer">Time: 120</div>
+
+<canvas id="game" width="700" height="450"></canvas>
+
+
+<script>
+
+let canvas=document.getElementById("game");
+let ctx=canvas.getContext("2d");
+
+let player={
+x:350,
+y:225,
+size:20
+};
+
+
+let angels=[];
+
+for(let i=0;i<5;i++){
+
+angels.push({
+x:Math.random()*700,
+y:Math.random()*450,
+speed:0.6
+});
+
+}
+
+
+let blinking=false;
+let time=120;
+let gameOver=false;
+
+
+document.addEventListener("keydown",e=>{
+
+if(e.code==="Space")
+blinking=true;
+
+});
+
+
+document.addEventListener("keyup",e=>{
+
+if(e.code==="Space")
+blinking=false;
+
+});
+
+
+
+setInterval(()=>{
+
+if(!gameOver){
+
+time--;
+
+document.getElementById("timer").innerHTML=
+"Time: "+time;
+
+if(time<=0){
+
+alert("You survived the Angels!");
+location.reload();
+
+}
+
+}
+
+},1000);
+
+
+
+function moveAngels(){
+
+if(blinking){
+
+angels.forEach(a=>{
+
+let dx=player.x-a.x;
+let dy=player.y-a.y;
+
+let distance=Math.sqrt(dx*dx+dy*dy);
+
+a.x += (dx/distance)*a.speed*2;
+a.y += (dy/distance)*a.speed*2;
+
+
+});
+
+}
+
+}
+
+
+
+function draw(){
+
+ctx.clearRect(0,0,700,450);
+
+
+// player
+
+ctx.fillStyle="cyan";
+ctx.fillRect(
+player.x-10,
+player.y-10,
+20,
+20
+);
+
+
+// angels
+
+ctx.font="35px Arial";
+
+angels.forEach(a=>{
+
+ctx.fillText(
+"👽",
+a.x,
+a.y
+);
+
+
+// collision
+
+let d=Math.sqrt(
+(player.x-a.x)**2+
+(player.y-a.y)**2
+);
+
+if(d<25 && !gameOver){
+
+gameOver=true;
+
+alert("THE ANGELS GOT YOU.\nTime survived: "
++(120-time)+" seconds");
+
+location.reload();
+
+}
+
+});
+
+
+// darkness when blinking
+
+if(blinking){
+
+ctx.fillStyle="black";
+ctx.fillRect(0,0,700,450);
+
+ctx.fillStyle="white";
+ctx.font="30px Arial";
+ctx.fillText(
+"👁 BLINKING...",
+250,
+220
+);
+
+}
+
+
+}
+
+
+
+function loop(){
+
+if(!gameOver){
+
+moveAngels();
+draw();
+
+requestAnimationFrame(loop);
+
+}
+
+}
+
+loop();
+
+</script>
+
+</body>
+</html>
