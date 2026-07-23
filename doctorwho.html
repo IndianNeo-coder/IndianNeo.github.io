@@ -8,64 +8,43 @@
 
 <style>
 
-
 *{
     box-sizing:border-box;
 }
 
 
-
 body{
-
 
     margin:0;
 
     min-height:100vh;
 
-
     background:
-
-    radial-gradient(circle at center,
-    #003b4d,
-    #000 70%);
-
+    radial-gradient(circle at center,#003b4d,#000 70%);
 
     color:white;
 
-
-    font-family:"Courier New", monospace;
-
+    font-family:"Courier New",monospace;
 
     text-align:center;
 
-
     display:flex;
-
 
     justify-content:center;
 
-
     align-items:center;
 
-
     overflow:hidden;
-
 
 }
 
 
 
-/* Background stars */
-
-
 body::before{
-
 
     content:"";
 
-
     position:absolute;
-
 
     width:100%;
 
@@ -73,22 +52,16 @@ body::before{
 
 
     background-image:
-
     radial-gradient(white 1px,transparent 1px);
 
 
-    background-size:
-
-    40px 40px;
+    background-size:40px 40px;
 
 
     opacity:.25;
 
 
-    animation:
-
-    stars 20s linear infinite;
-
+    animation:stars 20s linear infinite;
 
 }
 
@@ -96,58 +69,44 @@ body::before{
 
 @keyframes stars{
 
-
 from{
-
 transform:translateY(0);
-
 }
-
 
 to{
-
 transform:translateY(40px);
+}
 
 }
 
-
-}
 
 
 
 
 .container{
 
-
     position:relative;
-
 
     width:80%;
 
-
     max-width:800px;
-
 
     padding:50px;
 
 
     background:
-
-    rgba(0,0,0,.75);
-
+    rgba(0,0,0,.8);
 
 
     border:
 
-    3px solid #00ffff;
+    3px solid cyan;
 
 
     border-radius:20px;
 
 
-
     box-shadow:
-
 
     0 0 30px cyan,
 
@@ -159,41 +118,82 @@ transform:translateY(40px);
 
 
 
-
 h1{
 
-
-    font-size:55px;
-
+    font-size:50px;
 
     letter-spacing:8px;
-
 
     color:#00ffff;
 
 
     text-shadow:
 
-
     0 0 10px cyan,
-
 
     0 0 30px blue;
 
-
 }
-
-
 
 
 
 .subtitle{
 
-
     color:#aaa;
 
+    letter-spacing:3px;
 
-    letter-spacing:4px;
+}
+
+
+
+
+input{
+
+
+    margin-top:30px;
+
+    padding:15px;
+
+
+    width:70%;
+
+
+    background:black;
+
+
+    color:white;
+
+
+    border:
+
+    2px solid cyan;
+
+
+    border-radius:10px;
+
+
+    font-family:"Courier New";
+
+
+    font-size:18px;
+
+
+    text-align:center;
+
+}
+
+
+
+input:focus{
+
+
+    outline:none;
+
+
+    box-shadow:
+
+    0 0 20px cyan;
 
 
 }
@@ -201,23 +201,63 @@ h1{
 
 
 
-h2{
+
+button{
 
 
-    margin-top:40px;
+    margin-top:25px;
 
 
-    color:#ddd;
+    padding:15px 30px;
+
+
+    background:black;
+
+
+    color:white;
+
+
+    border:
+
+    2px solid cyan;
+
+
+    border-radius:10px;
+
+
+    font-family:"Courier New";
+
+
+    font-size:18px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
 
 
 }
 
 
 
+button:hover{
+
+
+    background:cyan;
+
+    color:black;
+
+
+    box-shadow:
+
+    0 0 25px cyan;
+
+
+}
 
 
 
-/* Simulation cards */
 
 
 .card{
@@ -226,7 +266,7 @@ h2{
     display:block;
 
 
-    margin:25px auto;
+    margin:30px auto;
 
 
     width:350px;
@@ -235,11 +275,9 @@ h2{
     padding:25px;
 
 
-
     background:
 
-    rgba(0,20,30,.8);
-
+    rgba(0,30,40,.8);
 
 
     border:
@@ -248,7 +286,6 @@ h2{
 
 
     border-radius:15px;
-
 
 
     color:white;
@@ -268,7 +305,6 @@ h2{
 
 
 
-
 .card:hover{
 
 
@@ -280,7 +316,6 @@ h2{
 
     box-shadow:
 
-
     0 0 30px cyan;
 
 
@@ -289,27 +324,15 @@ h2{
 
 
 
-
-
 .status{
-
-
-    margin-top:30px;
 
 
     color:#00ff99;
 
 
-    font-size:18px;
-
-
-    animation:
-
-    pulse 2s infinite;
-
+    animation:pulse 2s infinite;
 
 }
-
 
 
 
@@ -328,63 +351,26 @@ opacity:.4;
 
 
 
+#error{
 
 
-button{
+    color:red;
 
+    margin-top:20px;
 
-    margin-top:35px;
-
-
-    padding:15px 30px;
-
-
-    background:black;
-
-
-    color:white;
-
-
-    border:
-
-
-    2px solid cyan;
-
-
-    border-radius:10px;
-
-
-    font-family:"Courier New";
-
-
-    font-size:18px;
-
-
-    cursor:pointer;
+    font-weight:bold;
 
 
 }
 
 
+small{
 
-button:hover{
+    font-size:14px;
 
-
-    background:cyan;
-
-
-    color:black;
-
-
-    box-shadow:
-
-
-    0 0 20px cyan;
-
+    color:#aaa;
 
 }
-
-
 
 
 </style>
@@ -398,43 +384,77 @@ button:hover{
 
 
 
-
-<div class="container">
-
+<div class="container" id="login">
 
 
 <h1>
-
 TARDIS ARCHIVES
+</h1>
 
+
+<p class="subtitle">
+
+TIME LORD DATABASE // RESTRICTED ACCESS
+
+</p>
+
+
+
+<input
+id="password"
+type="password"
+placeholder="ENTER TARDIS CODE">
+
+
+
+<br>
+
+
+
+<button onclick="checkPassword()">
+
+ACCESS ARCHIVES
+
+</button>
+
+
+
+<p id="error"></p>
+
+
+</div>
+
+
+
+
+
+
+<div class="container" id="archive" style="display:none;">
+
+
+<h1>
+TARDIS ARCHIVES
 </h1>
 
 
 
 <p class="subtitle">
 
-TIME LORD DATABASE // CLASSIFIED SIMULATIONS // CLASSIFIED HISTORY
+TIME LORD DATABASE // ACCESS GRANTED
 
 </p>
 
 
 
 
-<h2>
-
-Choose a Simulation
-
-</h2>
-
-
-
-
-
 <a class="card" href="dont-blink.html">
 
-DON'T BLINK
+
+ DON'T BLINK
+
 
 <br>
+
 
 <small>
 Weeping Angel Survival Protocol
@@ -442,7 +462,6 @@ Weeping Angel Survival Protocol
 
 
 </a>
-
 
 
 
@@ -464,8 +483,60 @@ Weeping Angel Survival Protocol
 
 
 
-
 </div>
+
+
+
+
+
+
+<script>
+
+
+function checkPassword(){
+
+
+let entered =
+document.getElementById("password").value;
+
+
+
+if(entered === "TARDIS"){
+
+
+document.getElementById("login").style.display="none";
+
+
+document.getElementById("archive").style.display="block";
+
+
+}
+
+
+
+else{
+
+
+document.getElementById("error").innerHTML=
+
+"⚠ ACCESS DENIED // INVALID CODE";
+
+
+}
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
 
 
 
